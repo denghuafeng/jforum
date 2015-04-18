@@ -2,7 +2,7 @@
 <%@page import="java.io.File" %>
 <%
 	String cfg = SystemGlobals.getValue(ConfigKeys.INSTALLATION_CONFIG);
-	String redirect = "forums/list.page";
+	String redirect = "forums/list"+SystemGlobals.getValue(ConfigKeys.SERVLET_EXTENSION);
 	
 	if (cfg == null || !(new File(cfg).exists()) || !SystemGlobals.getBoolValue(ConfigKeys.INSTALLED)) {	
 		redirect = "install.jsp";    
