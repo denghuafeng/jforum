@@ -1,0 +1,66 @@
+<#include "header.htm"/>
+<#import "../macros/pagination.ftl" as pagination/>
+<#import "../macros/presentation.ftl" as presentation/>
+
+<table cellspacing="0" cellpadding="10" width="100%" align="center">
+	<tr>
+		<td class="bodyline" valign="top">
+		
+			<#assign breadCrumb>
+				<table cellspacing="0" cellpadding="2" width="100%" align="center">
+					<tr>
+						<td valign="bottom" align="left">
+							<a class="nav" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a>
+							&raquo;
+							<a class="nav" href="${JForumContext.encodeURL("/topDownloads/list")}">${I18n.getMessage("ForumBase.topDownloads")}</a>
+						</td>
+						<td>&nbsp;
+						</td>
+					</tr>
+				</table>
+			</#assign>
+			
+			${breadCrumb}
+			
+			<table class="forumline" cellspacing="1" cellpadding="4" width="100%">
+				<tr>
+					<th class="thcornerl" nowrap="nowrap" align="center">&nbsp;${I18n.getMessage("Forums.Form.ForumName")}&nbsp;</th>
+					<th class="thtop" nowrap="nowrap" align="center">&nbsp;${I18n.getMessage("ForumIndex.topics")}&nbsp;</th>
+					<th class="thtop" nowrap="nowrap" align="center">&nbsp;${I18n.getMessage("Attachments.filename")}&nbsp;</th>
+					<th class="thtop" nowrap="nowrap" align="center">&nbsp;${I18n.getMessage("Attachments.filesize")}&nbsp;</th>					
+					<th class="thcornerr" nowrap="nowrap" align="center">&nbsp;${I18n.getMessage("Attachments.totalDownload")}&nbsp;</th>
+				</tr>
+
+				<!-- TOPICS LISTING -->
+				<#list topDownloads as topDownload>
+				<tr>
+					<td class="row2" valign="middle" align="center"><a class="postdetails" href="${JForumContext.encodeURL("/forums/show/${forums.get(topDownload_index).getId()}")}">${forums.get(topDownload_index).getName()}</a></td>					
+					<td class="row1">
+						<span class="topictitle">
+						<a href="${JForumContext.encodeURL("/posts/list/${topDownload.topicId}")}"><#if (topDownload.topicTitle?length == 0)>No Subject<#else>${topDownload.topicTitle?html}</#if></a>
+						</span>								
+					</td>
+
+					<td class="row2" valign="middle"><span class="postdetails"><img src="${contextPath}/templates/${templateName}/images/icon_disk.gif" alt="[Disk]" />
+					<a href="${JForumContext.encodeURL("/posts/downloadAttach/${topDownload.attachId}")}" class="gensmall">${topDownload.realFilename}</a></span></td>
+					<td class="row3" valign="middle" align="center">
+						<span class="genmed">
+						<#if (topDownload.filesize < 1024)>
+							${topDownload.filesize} bytes
+						<#else>
+							${topDownload.filesize / 1024} Kbytes							
+						</#if>
+						</span>
+					</td>
+
+					<td class="row2right" valign="middle" align="center"><span class="postdetails">${topDownload.downloadCount} ${I18n.getMessage("Attachments.time")}</span></td>
+				</tr>
+				</#list>		
+				<!-- END OF TOPICS LISTING -->
+			</table>  
+			
+			${breadCrumb}
+		</td>
+	</tr>
+</table>
+<#include "bottom.htm"/>

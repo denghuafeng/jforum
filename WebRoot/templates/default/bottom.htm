@@ -1,0 +1,23 @@
+</td>
+</tr>
+	<tr>
+		<td align="center">
+			<#if session?exists && session.isAdmin()><span class="gen"><a id="adminpanel" href='${JForumContext.encodeURL("/admBase/login")}'>${I18n.getMessage("ForumBase.admin")}</a></span></#if>
+		</td>
+	</tr>
+
+	<tr>
+		<td align="center">
+			<span class="copyright">Powered by <a class="copyright" href="http://jforum2.googlecode.com/" target="_blank">JForum ${version}</a> &copy; 2015 <a class="copyright" href="http://jforum.net/team.jsp" target="_blank">JForum Team</a> &bull; Maintained by <a class="copyright" href="http://www.andowson.com/" target="_blank">Andowson.com</a></span>
+		</td>
+	</tr>
+</table>
+
+<#if hasCodeBlock?default(false)>
+	<#include "highlighter_js.htm"/>
+</#if>
+
+<iframe src="${contextPath}/ping_session.jsp" height="0" width="0" frameborder="0" scrolling="no" title="session keeper"></iframe>
+
+</body>
+</html>

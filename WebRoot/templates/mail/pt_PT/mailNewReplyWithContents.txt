@@ -1,0 +1,13 @@
+<html>
+<head>
+<base href="${forumLink}">
+<link rel="stylesheet" type="text/css" href="${forumLink}templates/default/styles/style.css">
+</head>
+<body>
+${message}
+<br>
+---------<br>
+Ler este t�pico online: ${path}<br>
+N�o receber mais notifica��es deste t�pico: ${unwatch}<br>
+</body>
+</html>

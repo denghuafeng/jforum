@@ -1,0 +1,13 @@
+<html>
+<head>
+<base href="${forumLink}">
+<link rel="stylesheet" type="text/css" href="${forumLink}templates/default/styles/style.css">
+</head>
+<body>
+${message}
+<br>
+---------<br>
+T�ma online olvas�sa: ${path}<br>
+T�ma figyel�s�nek megsz�ntet�se: ${unwatch}<br>
+</body>
+</html>

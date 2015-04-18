@@ -1,0 +1,13 @@
+Bonjour ${user.username},
+
+Quelqu'un, probablement vous, c'est enregistré à ${forumName}
+Veuillez suivre le lien suivant pour terminer votre inscription.
+
+${url}
+
+Si vous préférez rentrer ces informations manuellement, rendez vous sur ${manualUrl} et saisissez les données suivantes :
+
+ID utilisateur: ${user.id}
+Code d'activation: ${user.getActivationKey()}
+
+Rappel: votre nom d'utilisateur est ${user.username}

@@ -1,0 +1,6 @@
+<#setting number_format = "#"/>
+Bonjour ${user.username}, 
+
+Vous avez un nouveau message privé. Vous pouvez le lire en utilisant le lien suivant:
+
+${path}

@@ -1,0 +1,12 @@
+Привет, это дайджест форума за неделю.
+
+<#list posts as post>
+
+Тема: ${post.subject}
+Ссылка: ${url}posts/list/${post.topicId}${extension}
+Пользователь: ${post.postUsername}
+Текст:
+${post.text}
+-------------
+
+</#list>

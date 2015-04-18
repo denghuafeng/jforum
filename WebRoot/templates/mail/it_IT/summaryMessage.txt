@@ -1,0 +1,12 @@
+Ciao, questo è il sommario settimanale del Forum .
+
+<#list posts as post>
+
+Oggetto: ${post.subject}
+Link: ${url}posts/list/${post.topicId}.page
+Poster: ${post.postUsername}
+Testo:
+${post.text}
+-------------
+
+</#list>

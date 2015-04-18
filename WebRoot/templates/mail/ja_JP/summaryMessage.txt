@@ -1,0 +1,14 @@
+こんにちは。
+
+今週のフォーラムの要約を送付致します。
+
+<#list posts as post>
+
+件名: ${post.subject}
+リンク: ${url}posts/list/${post.topicId}${extension}
+投稿者: ${post.postUsername}
+内容:
+${post.text}
+-------------
+
+</#list>

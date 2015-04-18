@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="${encoding}" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Smilies</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
+</head>
+<body bgcolor="#f7f7f8">
+
+<table>
+	<tr>
+		<td align="center">
+			<font class="gen">${I18n.getMessage("PostForm.smilieHelp")}</font>
+		</td>
+	</tr>
+
+	<tr>	
+		<td>
+			<table width="100%">
+				<tr>
+					<td style="line-height: 27px;" valign="top" align="left" width="300">
+						<#list smilies as s>
+							<a href="#" onclick="opener.emoticon('${s.code?html}'); window.focus();">${s.url}</a>&nbsp;&nbsp;
+						</#list>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+	<tr>
+		<td valign="bottom" align="center">
+			<input type="button" value="${I18n.getMessage("closeWindow")}" onclick="window.close();" class="mainoption" />
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

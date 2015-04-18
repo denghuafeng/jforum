@@ -1,0 +1,13 @@
+Bonjour,
+Ceci est le résumé de la semaine du forum.
+
+<#list posts as post>
+
+Sujet: ${post.subject}
+Lien: ${url}posts/list/${post.topicId}${extension}
+Rédacteur: ${post.postUsername}
+Texte:
+${post.text}
+-------------
+
+</#list>

@@ -1,0 +1,19 @@
+<#assign hasMessageContents = message?exists/>
+<#if hasMessageContents>
+	<#assign hasMessageContents = user?exists && user.notifyText()/>
+</#if>
+<#if !hasMessageContents>
+こんにちは。
+
+最後にサイトを訪問した後、トピック "${topic.title}" に返信がありましたのでご連絡します。
+
+次のURLをクリックすることで、返信メッセージを読むことができます。また、トピックを読むまでは（別の）返信があってもメールで連絡することはありませんので、ご注意ください。
+
+${path}
+
+もし、メールによる連絡はこれ以上必要ないという時は、次のURLをクリックしてください。
+
+${unwatch}
+<#else>
+<#include "mailNewReplyWithContents.txt"/>
+</#if>

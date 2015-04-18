@@ -1,0 +1,130 @@
+<#assign language = language?default("en_US")/>
+<?xml version="1.0" encoding="${encoding}" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding}" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/${language}.css" />
+<style type="text/css">
+th,td { text-align: left; }
+</style>
+<title>Menu</title>
+</head>
+<body text="#000000" vlink="#5493b4" link="#006699" bgcolor="#e5e5e5">
+<table cellspacing="0" cellpadding="4" width="100%" align="center">
+	<tr>
+		<td align="center">
+			<table class="forumline" cellspacing="1" cellpadding="4" width="100%">
+				<tr>
+					<th class="thhead"><b>${I18n.getMessage("Admin.administration")}</b></th>
+				</tr>
+				<tr><td class="row1"><a id="forumIndex" class="genmed" target="_top" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("Admin.forumIndex")}</a></td></tr>
+				<tr><td class="row1"><a id="forumAdminIndex" class="genmed" target="main" href="${JForumContext.encodeURL("/admBase/main")}">${I18n.getMessage("Admin.adminIndex")}</a></td></tr>
+				<tr>
+					<td class="catsides"><span class="cattitle">${I18n.getMessage("Admin.forumAdmin")}</span></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="groups" class="genmed" href="${JForumContext.encodeURL("/adminGroups/list")}" target="main">${I18n.getMessage("Admin.groups")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="users" class="genmed" href="${JForumContext.encodeURL("/adminUsers/list")}" target="main">${I18n.getMessage("Admin.users")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="20">&nbsp;</td>
+								<td>
+									<a id="pendingRegistrations" class="gensmall" href="${JForumContext.encodeURL("/adminUsers/pendingActivations")}" target="main">${I18n.getMessage("Admin.pendingActivations")}</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="categories" class="genmed" href="${JForumContext.encodeURL("/adminCategories/list")}" target="main">${I18n.getMessage("Admin.categories")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="forums" class="genmed" href="${JForumContext.encodeURL("/adminForums/list")}" target="main">${I18n.getMessage("Admin.forums")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="moderation" class="genmed" href="${JForumContext.encodeURL("/adminModeration/list")}" target="main">${I18n.getMessage("Admin.approving")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<a id="rankings" class="genmed" href="${JForumContext.encodeURL("/adminRankings/list")}" target="main">${I18n.getMessage("Admin.rankings")}</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<a id="bannings" class="genmed" href="${JForumContext.encodeURL("/adminBanning/list")}" target="main">${I18n.getMessage("Admin.banning")}</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<a id="stats" class="genmed" href="${JForumContext.encodeURL("/adminBoardStats/list")}" target="main">${I18n.getMessage("Admin.boardstats")}</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<a id="stats" class="genmed" href="${JForumContext.encodeURL("/adminSpamBlock/list")}" target="main">${I18n.getMessage("Admin.spamblock")}</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="configurations" class="genmed" href="${JForumContext.encodeURL("/adminConfig/list")}" target="main">${I18n.getMessage("Admin.configurations")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="smilies" class="genmed" href="${JForumContext.encodeURL("/adminSmilies/list")}" target="main">${I18n.getMessage("Admin.smilies")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="search" class="genmed" href="${JForumContext.encodeURL("/adminSearchStats/list")}" target="main">${I18n.getMessage("Admin.search")}</a></td>
+				</tr>
+				<tr>
+					<td class="row1">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<tr>
+								<td colspan="2" class="genmed">
+									${I18n.getMessage("Admin.attachments")}
+								</td>
+							</tr>
+							<tr>
+								<td width="20">&nbsp;</td>
+								<td>
+									<a id="attachmentsConfigurations" class="gensmall" href="${JForumContext.encodeURL("/adminAttachments/configurations")}" target="main">${I18n.getMessage("Admin.attachConfigurations")}</a>
+								</td>
+							</tr>
+							<tr>
+								<td width="20">&nbsp;</td>
+								<td>
+									<a id="attachmentsQuota" class="gensmall" href="${JForumContext.encodeURL("/adminAttachments/quotaLimit")}" target="main">${I18n.getMessage("Admin.attachQuota")}</a>
+								</td>
+							</tr>
+							<tr>
+								<td width="20">&nbsp;</td>
+								<td>
+									<a id="attachmentsExtensionGroups" class="gensmall" href="${JForumContext.encodeURL("/adminAttachments/extensionGroups")}" target="main">${I18n.getMessage("Admin.attachExtensionGroups")}</a>
+								</td>
+							</tr>
+							<tr>
+								<td width="20">&nbsp;</td>
+								<td>
+									<a id="attachmentsExtensions" class="gensmall" href="${JForumContext.encodeURL("/adminAttachments/extensions")}" target="main">${I18n.getMessage("Admin.attachExtensions")}</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="row1"><a id="cache" class="genmed" href="${JForumContext.encodeURL("/adminCache/list")}" target="main">${I18n.getMessage("Admin.cache")}</a></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<div align="center"><span class="copyright">Powered by <a class="copyright" href="http://www.jforum.net/" target="_blank">JForum</a></span></div>
+<br />
+
+</body>
+</html>

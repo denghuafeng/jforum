@@ -1,0 +1,58 @@
+<html>
+<head>
+<#-- CSRF fix-->
+<title>default/admin/boardStats_list.htm</title></head>
+<body>
+<#setting number_format = "#.####"/>
+<style type="text/css">@import url( ${contextPath}/templates/default/styles/style.css?${startupTime} );</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("table tr:nth-child(even) td").addClass("row2");
+        $("table tr:nth-child(odd) td").addClass("row1");
+    });
+</script>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="4" height="25">${I18n.getMessage("BoardStats.statistics")}</th>
+	</tr>
+    <tr>
+		<th class="thhead" valign="middle" height="25">${I18n.getMessage("BoardStats.statistic")}</th>
+        <th class="thhead" valign="middle" height="25">${I18n.getMessage("BoardStats.totalSinceRestart")}</th>
+        <th class="thhead" valign="middle" height="25">${I18n.getMessage("BoardStats.countPerMinute")}</th>
+        <th class="thhead" valign="middle" height="25">&nbsp;</th>
+	</tr>
+	<#list records as record>
+	<tr>
+		<td valign="left">${record.tag}</td>
+        <td valign="left">${record.count}</td>
+        <td valign="right">${record.cps}</td>
+        <td>
+        <#if ! record.isDetailForbidden() >
+			<a href="${JForumContext.encodeURL("/adminBoardStats/showLast/${record.tag}")}">${I18n.getMessage("BoardStats.recentHistory")}</a>
+        </#if>
+        </td>
+	</tr>
+	</#list>
+</table>
+<br />
+
+<div align="center">
+<table class="forumline" cellspacing="1" cellpadding="3" width="50%" border="0">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2" height="25">${I18n.getMessage("BoardStats.info")}</th>
+	</tr>
+    <tr>
+        <th class="thhead" valign="middle" height="25" width="50%">${I18n.getMessage("BoardStats.infoName")}</th>
+        <th class="thhead" valign="middle" height="25" width="50%">${I18n.getMessage("BoardStats.infoValue")}</th>
+	</tr>
+	<#list sysInfo as item>
+		<tr> <td valign="left">${item.name?html}</td><td valign="left">${item.value}</td> </tr>
+	</#list>
+</table>
+</div>
+<br />
+
+</body></html>
+

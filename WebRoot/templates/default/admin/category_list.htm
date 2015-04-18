@@ -1,0 +1,73 @@
+<#include "header.htm"/>
+
+<form action="${JForumContext.encodeURL("/jforum")}" method="post" name="form" id="form" accept-charset="${encoding}">
+<input type="hidden" name="action" value="delete" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="OWASP_CSRFTOKEN" value="${OWASP_CSRFTOKEN!""}" />
+
+<table class="forumline" cellspacing="0" cellpadding="3" width="100%">
+	<tr>
+		<th class="thhead" valign="middle" colspan="5">${I18n.getMessage("Category.List.Title")}</th>
+	</tr>
+
+	<#if errorMessage?exists>
+		<tr>
+			<td align="center" colspan="5"><span class="gensmall">${errorMessage}</span></td>
+		</tr>
+	</#if>
+
+	<#assign counter = 1/>
+	<#assign categories = repository.getAllCategories()/>
+	<#list categories as category>
+		<tr>
+			<td class="catleft" width="38%"><span class="cattitle">${category.name?html}</span></td>
+			<td class="catleft" align="center"><span class="gen"><a href="${JForumContext.encodeURL("/${moduleName}/edit/${category.id}")}">${I18n.getMessage("Category.List.Edit")}</a></span></td>
+			<td class="catleft" align="center" width="10%"><input type="checkbox" name="categories_id" value="${category.id}" /></td>
+			
+			<td class="catleft" align="center" width="10%">
+				<#if (counter > 1)>
+					<input type="button" value="${I18n.getMessage("up")}" class="mainoption" onclick="document.location = '${JForumContext.encodeURL("/${moduleName}/up/${category.id}")}';" />&nbsp;
+				<#else>	
+					&nbsp;
+				</#if>
+			</td>
+
+			<td class="catleft" align="center" width="10%">
+				<#if (counter < categories.size())>
+					<input type="button" value="${I18n.getMessage("down")}" class="mainoption" onclick="document.location = '${JForumContext.encodeURL("/${moduleName}/down/${category.id}")}';" />&nbsp;
+				<#else>
+					&nbsp;
+				</#if>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="5" class="row1">
+			<#if (repository.getCategory(category.id).getForums().size() > 0) >
+				<table width="100%">
+				<#list repository.getCategory(category.id).getForums() as forum>
+					<tr>
+						<td>&nbsp;</td>
+						<td class="row1" width="100%"><span class="forumlink">${forum.name?html}</span></td>
+						<td>&nbsp;</td>
+					</tr>
+				</#list>
+				</table>
+			</#if>
+			</td>
+		</tr>
+
+		<#assign counter = counter + 1/>
+	</#list>
+
+	<tr>
+		<td class="catbottom" colspan="5" align="center">
+			<input class="mainoption" type="button" value="${I18n.getMessage("Category.List.ClickToNew")}" id="btn_insert" name="button" onclick="document.location = '${JForumContext.encodeURL("/${moduleName}/insert")}';" />
+			&nbsp;&nbsp;
+			<input class="mainoption" type="submit" value="${I18n.getMessage("Category.List.ClickToDelete")}" name="submit" />
+		</td>
+	</tr>
+</table>
+</form>
+
+<#include "bottom.htm"/>

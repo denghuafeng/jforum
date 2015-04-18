@@ -1,0 +1,76 @@
+<#include "header.htm"/>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+<#include "js/permission_control.js"/>
+/* ]]> */
+</script>
+
+<form accept-charset="${encoding}" name="form1" action="${JForumContext.encodeURL("/jforum")}" method="post">
+<input type="hidden" name="action" value="permissionsSave" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="id" value="${group.id}" />
+<input type="hidden" name="OWASP_CSRFTOKEN" value="${OWASP_CSRFTOKEN!""}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%">
+	<tr>
+		<th class="thhead" valign="middle" colspan="3">${I18n.getMessage("PermissionControl.groupTitle")} - "<i>${group.name?html}</i>"</th>
+	</tr>
+
+	<tr>
+		<td colspan="3">
+			<span class="gen" style="text-align:center">
+			<font color="#ff0000"><b>${I18n.getMessage("PermissionControl.howTo")}:</b></font> <br />
+			</span>
+			<div class="gensmall"><ul>
+			<li>${I18n.getMessage("PermissionControl.areRestrictive")}. </li>
+			<li>${I18n.getMessage("PermissionControl.allowAllDescrption")}. </li>
+			<li>${I18n.getMessage("PermissionControl.notTrivial")}.</li></ul> 
+			</div>
+		</td>
+	</tr>
+
+	<#list sections as section>
+		<tr>
+			<td class="row1" colspan="3"><span class="gen"><b>${section.sectionName}</b></span></td>
+		</tr>
+
+		<#assign permissions = section.permissions/>
+		<#list permissions as p>
+			<tr>
+				<td class="row2">&nbsp;</td>
+				<td class="row2" valign="middle" width="33%"><span class="gensmall">${p.name?html}</span></td>
+				<td class="row2" valign="middle" align="left">
+					<span class="gensmall">
+					<#if p.type == "single">
+						<select name="${p.id}$single">
+					<#else>
+						<select name="${p.id}" multiple="multiple" size="4" onchange="return checkThisField(this)">
+						<option value="all">${I18n.getMessage("PermissionControl.allowAll")}</option>
+					</#if>
+					
+					<#assign permissionData = p.data/>
+
+					<#assign allValues = ""/>
+					<#list permissionData as pd>
+						<option value="${pd.id}" <#if pd.selected == true>selected="selected"</#if>>${pd.name?html}</option>
+						<#assign allValues = allValues +";"+ pd.id/>
+					</#list>
+					</select>
+					
+					<input type="hidden" name="all${p.id}" value="${allValues}" />
+					</span>
+				</td>
+			</tr>
+		</#list>
+	</#list>
+
+	<tr>
+		<td class="catbottom" colspan="3" align="center"><input class="mainoption" type="submit" value="${I18n.getMessage("PermissionControl.save")}" name="submit" /></td>
+	</tr>
+</table>
+
+</form>
+<script type="text/javascript">validateSelectFields();</script>
+
+<#include "bottom.htm"/>

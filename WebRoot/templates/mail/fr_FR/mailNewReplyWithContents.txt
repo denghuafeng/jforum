@@ -1,0 +1,13 @@
+<html>
+<head>
+<base href="${forumLink}">
+<link rel="stylesheet" type="text/css" href="${forumLink}templates/default/styles/style.css">
+</head>
+<body>
+${message}
+<br>
+---------<br>
+Lire ce sujet en ligne: ${path}<br>
+Se d�sinscrire du sujet: ${unwatch}<br>
+</body>
+</html>

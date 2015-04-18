@@ -1,0 +1,14 @@
+Ciao ${user.username}
+
+Qualcuno, tu probabilmente, si è registrato a  ${forumName}
+Per favore, segui questo link per completare la procedura di registrazione. 
+
+${url}
+
+Se preferisci inserire queste informazioni manualmente vai a  ${manualUrl} e
+inserisci le seguenti informazioni
+
+User ID: ${user.id}
+Auth code: ${user.getActivationKey()}
+
+Ricorda: il tuo username è: ${user.username}

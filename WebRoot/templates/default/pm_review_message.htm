@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="${encoding}" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="${encoding}"/>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>${pageTitle}</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/${language}.css" />
+<#if hasCodeBlock?default(false)>
+	<#include "highlighter_css.htm"/>
+</#if>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#01336B" vlink="#01336B">
+<span class="gen"><a name="top"></a></span>
+
+<table cellspacing="0" cellpadding="10" width="100%" align="center">
+	<tbody>
+		<tr>
+			<td class="bodyline">
+				<table class="forumline" cellspacing="1" cellpadding="4" width="100%">
+					<tbody>
+						<tr>
+							<th class="thhead" nowrap="nowrap" colspan="3">${I18n.getMessage("PrivateMessage.inboxMessage")}</th>
+						</tr>
+						<tr>
+							<td class="row2" width="10%"><span class="genmed">${I18n.getMessage("PrivateMessage.from")}:</span></td>
+							<td class="row2" colspan="2"><span class="genmed"><a class="nav" href="${JForumContext.encodeURL("/user/profile/${pm.fromUser.id}")}">${pm.fromUser.username}</a></span></td>
+						</tr>
+						<tr>
+							<td class="row2" width="10%"><span class="genmed">${I18n.getMessage("PrivateMessage.to")}:</span></td>
+							<td class="row2" colspan="2"><span class="genmed"><a class="nav" href="${JForumContext.encodeURL("/user/profile/${pm.toUser.id}")}">${pm.toUser.username}</a></span></td>
+						</tr>
+						<tr>
+							<td class="row2" width="10%"><span class="genmed">${I18n.getMessage("PrivateMessage.date")}:</span></td>
+							<td class="row2" colspan="2"><span class="genmed">${pm.formattedDate}</span></td>
+						</tr>
+						<tr>
+							<td class="row2" width="10%"><span class="genmed">${I18n.getMessage("PrivateMessage.subject")}:</span></td>
+							<td class="row2"><span class="genmed">${pm.post.subject?html}</span></td>
+							<td class="row2" nowrap="nowrap" align="right">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="row1" valign="top" colspan="3">
+								<div class="postbody">${pm.post.text}
+								<#if (pm.fromUser.attachSignatureEnabled && pm.fromUser.signature?exists && pm.fromUser.signature?length > 0 && pm.post.isSignatureEnabled())>
+								<hr />
+								${pm.fromUser.signature}
+								</#if>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		  </td>
+		</tr>
+	</tbody>
+</table>
+
+<#if hasCodeBlock?default(false)>
+	<#include "highlighter_js.htm"/>
+</#if>
+
+</body>
+</html>

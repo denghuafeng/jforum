@@ -1,0 +1,13 @@
+<html>
+<head>
+<base href="${forumLink}">
+<link rel="stylesheet" type="text/css" href="${forumLink}templates/default/styles/style.css">
+</head>
+<body>
+${message}
+<br>
+---------<br>
+Les dette emnet online: ${path}<br>
+Stopp varsling om dette emnet: ${unwatch}<br>
+</body>
+</html>

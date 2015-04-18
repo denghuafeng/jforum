@@ -1,0 +1,20 @@
+<#include "header.htm"/>
+<table class="forumline" align="center" cellpadding="3" cellspacing="1" width="80%">
+	<tr>
+		<th class="thhead" colspan="2" valign="middle">${I18n.getMessage("User.agreement.title")}</th>
+	</tr>
+				
+	<tr>
+		<td class="row1" colspan="2" width="100%">
+			<div class="gen">${agreementContents}</div>
+		</td>
+	</tr>				
+				
+	<tr align="center">
+		<td class="catbottom" colspan="2">
+			<input class="mainoption" value="${I18n.getMessage("User.agreement.accept")}" name="submit" onclick="document.location = '${JForumContext.encodeURL("/user/acceptAgreement")}';" type="button" />&nbsp;&nbsp;
+			<input class="mainoption" value="${I18n.getMessage("User.agreement.noAccept")}" onclick="document.location = '${JForumContext.encodeURL("/forums/list")}';" type="button" />&nbsp;&nbsp;
+		</td>
+	</tr>
+</table>
+<#include "bottom.htm"/>

@@ -1,0 +1,28 @@
+<#include "header.htm"/>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%">
+	<tr>
+		<th class="thhead" valign="middle" colspan="7">${I18n.getMessage("Cache.postsInfo")}</th>
+	</tr>
+
+	<tr>
+		<td align="center" colspan="3"><span class="gen"><font color="#ff0000"><b>${I18n.getMessage("Cache.danger")}</b></font></span></td>
+	</tr>
+
+	<tr>
+		<td class="gen"><b>${I18n.getMessage("Cache.topicTitle")}</b></td>
+		<td class="gen"><b>${I18n.getMessage("Cache.numberOfPosts")}</b></td>
+		<td class="gen"><b>${I18n.getMessage("Cache.action")}</b></td>
+	</tr>
+
+	<#list topics as t>
+		<tr>
+			<td class="row2"><a class="gen" href="${JForumContext.encodeURL("/posts/list/${t.id}")}" target="_blank">${t.title}</a></td>
+			<td class="row2"><span class="gen">${repository.size(t.id)}</span></td>
+			<td class="row2"><a class="gen" href="${JForumContext.encodeURL("/adminCache/postsClear/${t.id}")}">${I18n.getMessage("Cache.clear")}</a>
+			</td>
+		</tr>
+	</#list>
+</table>
+
+<#include "bottom.htm"/>

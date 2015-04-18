@@ -1,0 +1,13 @@
+こんにちは、${user.username} さん、
+
+${user.username} さん（と思われる方）が、${forumName} でユーザ登録を行いました。
+次のURLをクリックしてユーザ登録の完了を行ってください。
+
+${url}
+
+(上をクリックするのではなく)自分で情報を入力して登録を完了させるには、サイト ${manualUrl} に行き、次の情報を入力してください。
+
+ユーザID: ${user.id}
+Auth code: ${user.getActivationKey()}
+
+注意：ユーザ名が、${user.username} であることを忘れないでください。

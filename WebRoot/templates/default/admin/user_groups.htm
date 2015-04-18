@@ -1,0 +1,27 @@
+<#include "header.htm"/>
+
+<#import "macros/group_macros.ftl" as lib />
+
+<form accept-charset="${encoding}" name="form" action="${JForumContext.encodeURL("/jforum")}" method="post">
+<input type="hidden" name="action" value="groupsSave" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="user_id" value="${user.id}" />
+<input type="hidden" name="OWASP_CSRFTOKEN" value="${OWASP_CSRFTOKEN!""}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2">${groupFor}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Groups.Form.GroupName")}</span></td>
+		<td class="row2"><@lib.selectFieldGroups "groups", groups, 0, true, selectedList/></td>
+	</tr>
+
+	<tr>
+		<td class="catbottom" colspan="2" align="center"><input class="mainoption" type="submit" value="${I18n.getMessage("Groups.Form.ClickToUpdate")}" name="submit" /></td>
+	</tr>
+</table>
+</form>
+  
+<#include "bottom.htm"/>

@@ -1,0 +1,42 @@
+<html>
+<head>
+<#-- CSRF fix-->
+<title>default/admin/boardStats_showLast.htm</title>
+</head>
+<body>
+<#setting number_format = "#.####"/>
+<style type="text/css">@import url( ${contextPath}/templates/default/styles/style.css?${startupTime} );</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("table tr:nth-child(even) td").addClass("row2");
+        $("table tr:nth-child(odd) td").addClass("row1");
+    });
+</script>
+
+<form accept-charset="${encoding}" name="form" action="${contextPath}/jforum" method="post">
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="OWASP_CSRFTOKEN" value="${OWASP_CSRFTOKEN!""}" />
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+	<tr>
+		<th class="thhead" colspan="2" valign="middle" height="25">${I18n.getMessage("BoardStats.last100")} : ${tag}</th>
+	</tr>
+	<#if times?has_content>
+		<#list times as time>
+			<#if data.get(time)??>
+				<tr>
+					<td valign="left">${data.get(time)}</td>
+					<td valign="left">${time?datetime}</td>
+				</tr>
+			</#if>
+		</#list>
+	<#else>
+		<tr>
+			<td valign="left">${I18n.getMessage("BoardStats.noDetail")}</td>
+		</tr>
+	</#if>
+</table>
+</form>
+
+</body></html>

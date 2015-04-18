@@ -1,0 +1,17 @@
+<#assign hasMessageContents = message?exists/>
+<#if hasMessageContents>
+	<#assign hasMessageContents = user?exists && user.notifyText()/>
+</#if>
+<#if !hasMessageContents>
+こんにちは。
+
+フォーラムに、新しいトピックが作成されましたので、ご連絡します。トピックのタイトルは、「${topic.title}」です。
+
+トピックを読むには、次のURLをクリックしてください。
+
+${path}
+
+このフォーラムからの連絡はこれ以上必要ないという時は、次の ${unwatch} をアクセスしてください。
+<#else>
+<#include "mailNewReplyWithContents.txt"/>
+</#if>

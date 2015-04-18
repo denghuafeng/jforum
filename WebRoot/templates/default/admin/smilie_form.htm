@@ -1,0 +1,32 @@
+<#include "header.htm"/>
+
+<form accept-charset="${encoding}" name="form" action="${JForumContext.encodeURL("/jforum")}?OWASP_CSRFTOKEN=${OWASP_CSRFTOKEN!""}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="action" value="${action}" />
+<input type="hidden" name="module" value="${moduleName}" />
+<input type="hidden" name="OWASP_CSRFTOKEN" value="${OWASP_CSRFTOKEN!""}" />
+<#if smilie?exists>
+<input type="hidden" name="id" value="${smilie.id}" />
+</#if>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2">${I18n.getMessage("Smilies.Form.Title")}</th>
+	</tr>
+
+	<tr>
+		<td class="row1" width="38%"><span class="gen">${I18n.getMessage("Smilies.Form.Code")}</span></td>
+		<td class="row2"><input type="text" class="post" style="width: 200px" maxlength="50" size="25" name="code" value="<#if smilie?exists>${smilie.code?html}</#if>" /></td>
+	</tr>
+
+	<tr>
+		<td class="row1"><span class="gen">${I18n.getMessage("Smilies.Form.Url")}</span></td>
+		<td class="row2"><input type="file" class="post" style="width:200px" maxlength="255" size="25" name="smilie_img" /></td>
+	</tr>
+
+	<tr>
+		<td class="catbottom" colspan="2" align="center"><input class="mainoption" type="submit" value="${I18n.getMessage("Smilies.Form.ClickToUpdate")}" name="submit" /></td>
+	</tr>
+</table>
+</form>
+   
+<#include "bottom.htm"/>

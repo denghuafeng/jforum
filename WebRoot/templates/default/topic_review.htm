@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="${encoding}" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="${encoding}"/>
+<title>${pageTitle}</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/${language}.css" />
+<#if hasCodeBlock?default(false)>
+	<#include "highlighter_css.htm"/>
+</#if>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${contextPath}/templates/${templateName}/js/post.js?${startupTime}"></script>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#01336B" vlink="#01336B">
+<span class="gen"><a name="top"></a></span>
+
+<table cellpadding="3" cellspacing="1" width="100%" class="forumline">
+	<tr>
+		<th class="thcornerl" width="150">${I18n.getMessage("PostShow.author")}</th>
+		<th class="thcornerr">${I18n.getMessage("PostShow.messageTitle")}</th>
+	</tr>
+
+	<#list posts as post>
+		<#if post_index % 2 == 0>
+			<#assign rowColor = "row1">
+		<#else>
+			<#assign rowColor = "row2">
+		</#if>
+
+		<#assign user = users.get(post.userId)/>
+
+		<tr>
+			<td align="left" valign="top" class="row1">
+				<span class="name"><b>${user.username}</b></span>
+			</td>
+			
+			<td class="row1" valign="top">
+				<table width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="100%">
+							<img src="${contextPath}/templates/${templateName}/images/icon_minipost.gif" width="12" height="9" alt="Post" />
+							<span class="postdetails">${post.formattedTime}
+							<span class="gen">&nbsp;</span>&nbsp;&nbsp;&nbsp;${I18n.getMessage("PostShow.subject")}: ${post.subject?default("")?html} </span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><hr /></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="postbody">${post.text}</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="spacerow"><img src="${contextPath}/templates/${templateName}/images/spacer.gif" alt="" width="1" /></td>
+		</tr>
+	</#list>
+</table>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+limitURLSize();
+/* ]]> */
+</script>
+
+<#if hasCodeBlock?default(false)>
+	<#include "highlighter_js.htm"/>
+</#if>
+
+</body>
+</html>

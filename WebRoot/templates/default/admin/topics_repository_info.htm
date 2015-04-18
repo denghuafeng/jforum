@@ -1,0 +1,28 @@
+<#include "header.htm"/>
+
+<table class="forumline" cellspacing="1" cellpadding="3" width="100%">
+	<tr>
+		<th class="thhead" valign="middle" colspan="2">${I18n.getMessage("Cache.topicsInfo")}</th>
+	</tr>
+
+	<tr>
+		<td align="center" colspan="2"><span class="gen"><font color="#ff0000"><b>${I18n.getMessage("Cache.danger")}</b></font></span></td>
+	</tr>
+
+	<#list categories as c>
+		<tr>
+			<td colspan="2"><h3><b>${c.name?html}</b></h3></td>
+		</tr>
+
+		<#list c.getForums() as f>
+			<tr>
+				<td class="row2" width="40%"><a class="gen" href="${JForumContext.encodeURL("/forums/show/${f.id}")}" target="_blank">${f.name?html}</a></td>
+				<td class="row2">
+					<a class="gen" href="${JForumContext.encodeURL("/adminCache/topicsClear/${f.id}")}">${I18n.getMessage("Cache.clear")}</a>
+				</td>
+			</tr>
+		</#list>
+	</#list>
+</table>
+
+<#include "bottom.htm"/>

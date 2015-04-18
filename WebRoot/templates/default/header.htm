@@ -1,0 +1,120 @@
+<#setting number_format = "#"/>
+<#setting datetime_format = dateTimeFormat/>
+<#assign logged = logged?default(false)/>
+<#assign language = language?default("en_US")/>
+<#assign hasCodeBlock = hasCodeBlock?default(false)/>
+<?xml version="1.0" encoding="${encoding}" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=${encoding}" />
+<meta http-equiv="Pragma" content="no-cache" />	
+<meta http-equiv="Expires" content="-1" />
+<meta name="description" content="${metaDescription}" />
+<meta name="keywords" content="${metaKeywords}" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/${language}.css" />
+<#if isNewPost?exists || isEdit?exists || htmlAllowed?exists>
+<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/tabs.css" />
+</#if>
+<#if hasCodeBlock?default(false) || isNewPost?exists || isEdit?exists || htmlAllowed?exists>
+	<#include "highlighter_css.htm"/>
+</#if>
+<title>${pageTitle?default("JForum")?html}</title>
+
+<#if googleAnalyticsTracker?exists >
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', '${googleAnalyticsTracker}']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setSiteSpeedSampleRate', 100]);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+</#if>
+</head>
+<body class="${language}">
+<!--
+Original theme from phpBB (http://www.phpbb.com) subSilver
+Created by subBlue design
+http://www.subBlue.com
+
+Modifications by JForum Team
+-->
+<table width="100%">
+	<tr>
+		<td>
+			<table cellspacing="0" cellpadding="0" width="100%">
+				<tr>
+					<td>
+						<a href="${homepageLink}"><img src="${contextPath}/templates/${templateName}/images/logo.jpg" vspace="1" alt="[Logo]" /></a>
+					</td>
+					 
+					<td width="100%" align="center" valign="middle">
+						<span class="boardtitle">${forumTitle?default("JForum")}</span>
+						<table cellspacing="0" cellpadding="2">
+							<tr>
+								<td valign="top" nowrap="nowrap" align="center">&nbsp;									
+									<span class="mainmenu"><img src="${contextPath}/templates/${templateName}/images/icon_mini_search.gif" alt="[Search]"/> <a id="search" class="mainmenu" href="${JForumContext.encodeURL("/search/filters")}"><b>${I18n.getMessage("ForumBase.search")}</b></a> &nbsp;
+									<img src="${contextPath}/templates/${templateName}/images/icon_mini_recentTopics.gif" alt="[Recent Topics]" /> <a id="latest" class="mainmenu" href="${JForumContext.encodeURL("/recentTopics/list")}">${I18n.getMessage("ForumBase.recentTopics")}</a> &nbsp;
+									<img src="${contextPath}/templates/${templateName}/images/icon_mini_recentTopics.gif" alt="[Hottest Topics]" /> <a id="hottest" class="mainmenu" href="${JForumContext.encodeURL("/hottestTopics/list")}">${I18n.getMessage("ForumBase.hottestTopics")}</a> &nbsp;
+									<img src="${contextPath}/templates/${templateName}/images/icon_mini_recentTopics.gif" alt="[Top Downloads]" /> <a id="topdownload" class="mainmenu" href="${JForumContext.encodeURL("/topDownloads/list")}">${I18n.getMessage("ForumBase.topDownloads")}</a> &nbsp;
+									<img src="${contextPath}/templates/${templateName}/images/icon_mini_members.gif" alt="[Members]" /> <a id="userlist" class="mainmenu" href="${JForumContext.encodeURL("/user/list")}">${I18n.getMessage("ForumBase.usersList")}</a> &nbsp;
+									<img src="${contextPath}/templates/${templateName}/images/icon_mini_groups.gif" alt="[Groups]" /> <a id="backtosite" class="mainmenu" href="${homepageLink}">${I18n.getMessage("ForumBase.backToSite")}</a>&nbsp;
+									
+									<br />
+
+									<#if canAccessModerationLog?default(false)>										
+										<img src="${contextPath}/templates/${templateName}/images/icon_mini_members.gif" alt="[Moderation Log]" /> <a id="moderationlog" class="mainmenu" href="${JForumContext.encodeURL("/moderation/showActivityLog")}">${I18n.getMessage("ModerationLog.moderationLog")}</a> &nbsp;
+									</#if>
+
+									<#if logged>										
+										<img src="${contextPath}/templates/${templateName}/images/icon_mini_profile.gif" alt="[Profile]" /> <a id="myprofile" class="mainmenu" href="${JForumContext.encodeURL("/user/edit/${session.userId}")}">${I18n.getMessage("ForumBase.profile")}</a>&nbsp; 
+										<#if bookmarksEnabled>
+											<img src="${contextPath}/templates/${templateName}/images/icon_minipost.gif" alt="[Post]" /> <a class="mainmenu" href="${JForumContext.encodeURL("/bookmarks/list/${session.userId}")}">${I18n.getMessage("Bookmarks.myBag")}</a>&nbsp;
+										</#if>
+										<img src="${contextPath}/templates/${templateName}/images/icon_mini_message.gif" alt="[Message]" /> <a id="privatemessages" class="mainmenu" href="${JForumContext.encodeURL("/pm/inbox")}">
+											<#if (session.privateMessages > 0)>
+												${I18n.getMessage("ForumBase.newPm")}: (${session.privateMessages})
+											<#else>
+												${I18n.getMessage("ForumBase.privateMessages")}
+											</#if>
+										</a>&nbsp;
+										<img src="${contextPath}/templates/${templateName}/images/icon_minipost.gif" alt="[Post]" />
+										<a class="mainmenu" href="${JForumContext.encodeURL("/posts/listByUser/${session.userId}")}">${I18n.getMessage("ForumBase.posts")}</a>
+										&nbsp;
+										<#if !sso>
+											<img src="${contextPath}/templates/${templateName}/images/icon_mini_login.gif" alt="[Login]" /> <a id="logout" class="mainmenu" href="${JForumContext.encodeURL("/user/logout")}">${I18n.getMessage("ForumBase.logout")} [${session.username}]</a>
+										</#if>
+									</#if>
+	
+									<#if !logged && !sso>
+										<img src="${contextPath}/templates/${templateName}/images/icon_mini_register.gif" alt="[Register]" /> <a id="register" class="mainmenu" href="${JForumContext.encodeURL("/user/insert")}">${I18n.getMessage("ForumBase.register")}</a>&nbsp;/&nbsp;
+										<img src="${contextPath}/templates/${templateName}/images/icon_mini_login.gif" alt="[Login]" /> <a id="login" class="mainmenu" href="${JForumContext.encodeURL("/user/login")}">${I18n.getMessage("ForumBase.login")}</a>&nbsp;
+									</#if>
+
+									</span>									
+								</td>
+							</tr>
+							<#if announcement?exists && announcement?length != 0>
+							<tr>
+								<td>
+									<#-- added to display announcements across the site -->
+									<br /><br />
+									<div class="announcementBar">${announcement}</div>
+								</td>
+							</tr>
+							</#if>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
