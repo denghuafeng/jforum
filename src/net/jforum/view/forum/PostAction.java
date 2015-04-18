@@ -46,13 +46,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import net.jforum.Command;
@@ -102,6 +100,9 @@ import net.jforum.view.forum.common.TopicsCommon;
 import net.jforum.view.forum.common.ViewCommon;
 
 import org.apache.commons.lang3.StringUtils;
+
+import alex.zhrenjie04.wordfilter.WordFilterUtil;
+import alex.zhrenjie04.wordfilter.result.FilteredResult;
 import freemarker.template.SimpleHash;
 
 /**
@@ -972,9 +973,13 @@ public class PostAction extends Command
 		else {
 			path = new StringBuilder(path).append("/posts/list/").append(topicId).toString();
 		}
-
+		if(this.request.getParameter("filtered")!=null){ 
+			this.context.put("message",I18n.getMessage("PostShow.waitingModeration.filtered",//"document.getElementById('_174_239_Open_Image').style.display='inline'; document.getElementById('_174_239_Open_Text').style.display='inline'; />"+
+					new String[] {path +SystemGlobals.getValue(ConfigKeys.SERVLET_EXTENSION) }));
+		}else{
 		this.context.put("message", I18n.getMessage("PostShow.waitingModeration", 
 				new String[] { path + SystemGlobals.getValue(ConfigKeys.SERVLET_EXTENSION) }));
+		}
 	}
 
 	private void notModeratedYet()
@@ -1125,10 +1130,26 @@ public class PostAction extends Command
 			boolean moderate = (forum.isModerated() 
 				&& !pc.canAccess(SecurityConstants.PERM_MODERATION)
 				&& !pc.canAccess(SecurityConstants.PERM_ADMINISTRATION));
-
+			String title=this.request.getParameter("subject");
+			String text=this.request.getParameter("message");
+			//设置是否被过滤，true说明发布的内容包含了关键字，放到审核列表中
+			boolean filtered = false;
+			// 如果该组启用了过滤
+			if (!moderate && pc.canAccess(SecurityConstants.PERM_POST_FILTER)) {
+				FilteredResult fr = WordFilterUtil.filterText(title, '*');// 过滤标题
+				filtered = fr.getLevel() > 0;
+				// 过滤帖子内容
+				if (!filtered) {
+					fr = WordFilterUtil.filterText(text, '*');// 过滤标题
+					filtered = fr.getLevel() > 0;
+				}
+				moderate = moderate || filtered; // 更改审核状态
+			}
+		   /*  p.setModerate(moderate);
+		     int postId = postDao.addNew(p);  */  
 			if (newTopic) {
 				topic.setTime(new Date());
-				topic.setTitle(this.request.getParameter("subject"));
+				topic.setTitle(title);
 				topic.setModerated(moderate);
 				topic.setPostedBy(user);
 				topic.setFirstPostTime(topic.getTime());
@@ -1159,7 +1180,7 @@ public class PostAction extends Command
 				if (poll.getOptions().size() < 2) {
 					//it is not a valid poll, cancel the post
 					JForumExecutionContext.enableRollback();
-					post.setText(this.request.getParameter("message"));
+					post.setText(text);
 					post.setId(0);
 					this.context.put("errorMessage", I18n.getMessage("PostForm.needMorePollOptions"));
 					this.context.put("post", post);
@@ -1235,7 +1256,13 @@ public class PostAction extends Command
 					PostRepository.append(post.getTopicId(), PostCommon.preparePostForDisplay(post));
 				}
 			}
-			else {
+			else if(filtered){
+			    JForumExecutionContext.setRedirect(this.request.getContextPath()
+			         + "/posts/waitingModeration/"
+			         + (firstPost ? 0 : topic.getId())
+			         + "/" + topic.getForumId()
+			         + SystemGlobals.getValue(ConfigKeys.SERVLET_EXTENSION)+"?filtered=true");                       
+			  }else{
 				JForumExecutionContext.setRedirect(this.request.getContextPath() 
 					+ "/posts/waitingModeration/" 
 					+ (firstPost ? 0 : topic.getId())

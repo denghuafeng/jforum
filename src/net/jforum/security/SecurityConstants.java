@@ -55,6 +55,7 @@ public final class SecurityConstants
 	public static final String PERM_FORUM = "perm_forum";
 	public static final String PERM_ANONYMOUS_POST = "perm_anonymous_post";
 	public static final String PERM_MODERATION = "perm_moderation";
+	public static final String PERM_POST_FILTER="perm_post_filter";
 	public static final String PERM_REPLY_WITHOUT_MODERATION = "perm_reply_without_moderation";
 	public static final String PERM_MODERATION_APPROVE_MESSAGES = "perm_moderation_approve_messages";
 	public static final String PERM_MODERATION_FORUMS = "perm_moderation_forums";

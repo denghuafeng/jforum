@@ -168,5 +168,9 @@
 			<option value="deny" description="No"/>
 			<option value="allow" description="Yes"/>
 		</permission>
+		<permission id="perm_post_filter" title="Permissions.filterPost" type="single">
+		    <option value="deny" description="No"/>
+		    <option value="allow" description="Yes"/>
+		</permission>
 	</section>
 </sections>
